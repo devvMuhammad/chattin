@@ -1,40 +1,36 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CardContent, Card } from "@/components/ui/card";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
+import { SearchIcon, SmileIcon } from "@/components/ui/icons";
+import { Card } from "@/components/ui/card";
 
 export default function Component() {
   return (
     <div key="1" className="flex h-screen">
-      <aside className="w-80 border-r dark:border-zinc-700">
-        <div className="p-4 space-y-4">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold">Messages</h2>
-            <Button size="icon" variant="ghost">
-              <PencilIcon className="w-6 h-6" />
-            </Button>
-          </div>
+      <aside className="w-96 border-r dark:border-zinc-700">
+        <div className="p-4 space-y-5">
+          {/* <div className="flex justify-between items-center"> */}
+          <h2 className="text-xl font-bold">Messages</h2>
+
           <div className="relative">
             <SearchIcon className="absolute left-2.5 top-3 h-4 w-4 text-zinc-500 dark:text-zinc-400" />
             <Input
               className="pl-8"
-              placeholder="Search messages..."
+              placeholder="Start a conversation..."
               type="search"
             />
-            {/* <Button
-              className="absolute right-2.5 top-3"
-              size="icon"
-              variant="ghost"
-            /> */}
           </div>
           <div className="space-y-2">
-            <Card className="p-2">
-              <CardContent>
-                <h3 className="font-semibold">Contact Name</h3>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  Last message...
+            <Card className="p-2 grid items-center gap-x-2 grid-cols-[auto_1fr] border-zinc-700">
+              <Avatar className="h-14 w-14 text-3xl">
+                <AvatarFallback>A</AvatarFallback>
+              </Avatar>
+              <div>
+                <h1 className="font-bold">Muhammad Amjad</h1>
+                <p className="max-w-[250px] text-sm overflow-y-hidden overflow-x-hidden overflow-ellipsis text-nowrap">
+                  Kidhr the yar ajeeb bande ho bhai...
                 </p>
-              </CardContent>
+              </div>
             </Card>
           </div>
         </div>
@@ -78,67 +74,5 @@ export default function Component() {
         </footer>
       </section>
     </div>
-  );
-}
-
-function PencilIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-      <path d="m15 5 4 4" />
-    </svg>
-  );
-}
-
-function SearchIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  );
-}
-
-function SmileIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-      <line x1="9" x2="9.01" y1="9" y2="9" />
-      <line x1="15" x2="15.01" y1="9" y2="9" />
-    </svg>
   );
 }
