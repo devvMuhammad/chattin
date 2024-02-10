@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import { SmileIcon } from "@/components/ui/icons";
-
 export default function ChatWindow() {
   return (
     <section className="flex flex-col w-full">
