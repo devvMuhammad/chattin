@@ -1,35 +1,34 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import { SmileIcon } from "@/components/ui/icons";
+import ChatName from "./ChatName";
+import { Avatar, AvatarFallback } from "../ui/avatar";
+import GroupMessages from "./GroupMessages";
+import PersonalMessages from "./PersonalMessages";
+
+type Message = {
+  chatType?: "group" | "personal";
+  sender: string;
+  receiver: string;
+  time: Date;
+  senderImageURL: string;
+};
+
+// const messages: Message[] = [{  }];
+
 export default function ChatWindow() {
+  // Chat window can be of group chat or personal chat
+  // in personal chat, the name & profilePic is already shown on the top, so no need to show it in the chat
+  // in group chat, the name and avatar should be shown
+  const user = "muhammad";
   return (
     <section className="flex flex-col w-full">
-      <header className="border-b dark:border-zinc-700 p-4">
-        <h2 className="text-xl font-bold flex items-center gap-2">
-          <Avatar className="relative overflow-visible w-10 h-10">
-            <span className="absolute right-0 top-0 flex h-3 w-3 rounded-full bg-green-600" />
-            <AvatarImage alt="User Avatar" src="/placeholder-avatar.jpg" />
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
-          <div>
-            Maaz Bin Aamir
-            <span className="text-xs text-green-600 block">Online</span>
-          </div>
-        </h2>
-      </header>
+      <ChatName />
       <main className="flex-1 overflow-auto p-4">
         <div className="space-y-4">
-          <div className="flex items-end gap-2">
-            <div className="rounded-lg bg-zinc-200 dark:bg-zinc-700 p-2">
-              <p className="text-sm">Oeeee Pagal Insaan</p>
-            </div>
-          </div>
-          <div className="flex items-end gap-2 justify-end">
-            <div className="rounded-lg bg-blue-500 text-white p-2">
-              <p className="text-sm">What Happened Bro?</p>
-            </div>
-          </div>
+          {/* LEFT AND RIGHT CHAT FOR GROUP CHAT */}
+          <GroupMessages />
+          <PersonalMessages />
         </div>
       </main>
       <footer className="border-t dark:border-zinc-700 p-4">
