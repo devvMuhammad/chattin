@@ -22,9 +22,9 @@ export default function Chats() {
           />
         </div>
         <div className="space-y-2">
-          <Contact />
-          <Contact />
-          <Contact />
+          <Contact sender="Shahbaz" text="guys bhuk lagi, kuch mangawana?" />
+          <Contact sender="Aqib Raza" text="murshad despresson horaha" />
+          <Contact sender="Maaz" text="oeee pagal insaan" />
         </div>
       </div>
       <ThemeButton />
