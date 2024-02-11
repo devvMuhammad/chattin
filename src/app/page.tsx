@@ -1,10 +1,10 @@
 import ChatWindow from "@/components/chatWindow/ChatWindow";
-import Chats from "@/components/chats/Chats";
+import SidebarChats from "@/components/chats/SidebarChats";
 
 export default function Component() {
   return (
     <div key="1" className="flex h-screen">
-      <Chats />
+      <SidebarChats />
       <ChatWindow />
     </div>
   );

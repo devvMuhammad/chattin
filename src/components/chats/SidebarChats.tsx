@@ -5,8 +5,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import ThemeButton from "./ThemeButton";
 import Contact from "./Contact";
+import UserProfile from "./UserProfile";
 
-export default function Chats() {
+export default function SidebarChats() {
   return (
     <aside className="pb-4 flex flex-col justify-between w-96 h-screen border-r dark:border-zinc-700">
       <div className="p-4 space-y-5">
@@ -27,7 +28,7 @@ export default function Chats() {
           <Contact sender="Maaz" text="oeee pagal insaan" />
         </div>
       </div>
-      <ThemeButton />
+      <UserProfile sender="Muhammad Amjad" text="muhammadajoufi@gmail.com" />
     </aside>
   );
 }

@@ -9,7 +9,7 @@ export default function Contact({
   text: string;
 }) {
   return (
-    <Card className="p-2 grid items-center gap-x-2 grid-cols-[auto_1fr] border-zinc-700 hover:bg-zinc-900 cursor-pointer">
+    <Card className="p-2 flex gap-2 items-center border-zinc-700 hover:bg-zinc-900 cursor-pointer">
       <Avatar className="h-14 w-14 text-3xl">
         <AvatarFallback>S</AvatarFallback>
       </Avatar>

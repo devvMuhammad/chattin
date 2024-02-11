@@ -28,7 +28,7 @@ export default function ChatWindow() {
         <div className="space-y-4">
           {/* LEFT AND RIGHT CHAT FOR GROUP CHAT */}
           <GroupMessages />
-          {/* <PersonalMessages /> */}
+          <PersonalMessages />
         </div>
       </main>
       <footer className="border-t dark:border-zinc-700 p-4">
