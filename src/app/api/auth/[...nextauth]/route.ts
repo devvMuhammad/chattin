@@ -28,7 +28,7 @@ export const handler = NextAuth({
       // if not present, then generate a new one and save it to the database
       let newuserId;
       if (!userId) {
-        newuserId = nanoid(10);
+        newuserId = nanoid(15);
         // nano
         await User.create({
           name: token.name,
