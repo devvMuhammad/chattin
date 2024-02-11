@@ -18,7 +18,7 @@ export default function UserProfile({
       <Card className="p-2 flex items-center gap-2 border-zinc-700 hover:bg-zinc-900 cursor-pointer">
         <Avatar className="h-10 w-10 text-xl">
           <AvatarImage src={data?.user.image as string} />
-          <AvatarFallback>S</AvatarFallback>
+          <AvatarFallback>{(data?.user.name as string)[0]}</AvatarFallback>
         </Avatar>
         <div>
           <h1 className="font-bold">{data?.user.name}</h1>
