@@ -3,12 +3,18 @@ import { SearchIcon } from "@/components/ui/icons";
 import UserProfile from "./UserProfile";
 import MessageOverview from "./MessageOverview";
 
+const dummyMessages = [
+  { sender: "Shahbaz", recentMessage: "guys bhuk lagi, kuch mangawana?" },
+  { sender: "Aqib Raza", recentMessage: "murshad despresson horaha" },
+  { sender: "Maaz Bin Aamir", recentMessage: "Oyeee Pagal insaan" },
+];
+
 export default function SidebarChats() {
   // here, we will fetch the messages overview using a query function and display them
+
   return (
     <aside className="pb-4 flex flex-col justify-between w-96 h-screen border-r dark:border-zinc-700">
       <div className="p-4 space-y-5">
-        {/* <div className="flex justify-between items-center"> */}
         <h2 className="text-xl font-bold">Messages</h2>
 
         <div className="relative">
@@ -20,15 +26,13 @@ export default function SidebarChats() {
           />
         </div>
         <div className="space-y-2">
-          <MessageOverview
-            sender="Shahbaz"
-            text="guys bhuk lagi, kuch mangawana?"
-          />
-          <MessageOverview
-            sender="Aqib Raza"
-            text="murshad despresson horaha"
-          />
-          <MessageOverview sender="Maaz" text="oeee pagal insaan" />
+          {dummyMessages.map(({ sender, recentMessage }) => (
+            <MessageOverview
+              key={sender}
+              sender={sender}
+              text={recentMessage}
+            />
+          ))}
         </div>
       </div>
       <UserProfile sender="Muhammad Amjad" text="muhammadajoufi@gmail.com" />

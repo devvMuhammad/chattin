@@ -5,6 +5,7 @@ import ChatName from "./ChatName";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import GroupMessages from "./GroupMessages";
 import PersonalMessages from "./PersonalMessages";
+import SendMessage from "./SendMessage";
 
 type Message = {
   chatType?: "group" | "personal";
@@ -32,13 +33,7 @@ export default function ChatWindow() {
         </div>
       </main>
       <footer className="border-t dark:border-zinc-700 p-4">
-        <div className="flex items-center gap-2">
-          <Button size="icon" variant="ghost">
-            <SmileIcon className="w-6 h-6" />
-          </Button>
-          <Input className="flex-1" placeholder="Type a message..." />
-          <Button>Send</Button>
-        </div>
+        <SendMessage />
       </footer>
     </section>
   );

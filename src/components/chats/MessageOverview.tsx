@@ -14,7 +14,9 @@ export default function MessageOverview({
         <AvatarFallback>S</AvatarFallback>
       </Avatar>
       <div>
-        <h1 className="font-bold">{sender}</h1>
+        <h1 className="font-bold max-w-[250px] text-sm overflow-y-hidden overflow-x-hidden overflow-ellipsis text-nowrap">
+          {sender}
+        </h1>
         <p className="max-w-[250px] text-sm overflow-y-hidden overflow-x-hidden overflow-ellipsis text-nowrap">
           {text}
         </p>

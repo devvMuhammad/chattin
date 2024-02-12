@@ -1,6 +1,7 @@
 import ChatWindow from "@/components/chatWindow/ChatWindow";
 import SidebarChats from "@/components/chats/SidebarChats";
 
+// in personal message, there is no sender as that is already set in the whole object
 type PersonalMessage = {
   messageId: string;
   content: string;
@@ -8,8 +9,8 @@ type PersonalMessage = {
 };
 
 type PublicMessage = {
-  messageId: string;
   sender: string;
+  messageId: string;
   content: string;
   timestamp: Date;
 };
