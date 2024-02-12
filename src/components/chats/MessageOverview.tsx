@@ -2,10 +2,10 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Card } from "../ui/card";
 
 export default function MessageOverview({
-  sender,
+  name,
   text,
 }: {
-  sender: string;
+  name: string;
   text: string;
 }) {
   return (
@@ -15,7 +15,7 @@ export default function MessageOverview({
       </Avatar>
       <div>
         <h1 className="font-bold max-w-[250px] text-sm overflow-y-hidden overflow-x-hidden overflow-ellipsis text-nowrap">
-          {sender}
+          {name}
         </h1>
         <p className="max-w-[250px] text-sm overflow-y-hidden overflow-x-hidden overflow-ellipsis text-nowrap">
           {text}

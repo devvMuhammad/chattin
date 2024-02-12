@@ -1,17 +1,23 @@
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "@/components/ui/icons";
 import UserProfile from "./UserProfile";
-import MessageOverview from "./MessageOverview";
+import getChatsWithRecentMessage from "@/app/db/helpers/getChatsWithRecentMessage";
+import RecentMessages from "./RecentMessages";
+import { Suspense } from "react";
+import RecentMessagesSkeleton from "./RecentMessagesSkeleton";
 
-const dummyMessages = [
-  { sender: "Shahbaz", recentMessage: "guys bhuk lagi, kuch mangawana?" },
-  { sender: "Aqib Raza", recentMessage: "murshad despresson horaha" },
-  { sender: "Maaz Bin Aamir", recentMessage: "Oyeee Pagal insaan" },
-];
+export const revalidate = 10;
 
-export default function SidebarChats() {
+// const dummyMessages = [
+//   { sender: "Shahbaz", recentMessage: "guys bhuk lagi, kuch mangawana?" },
+//   { sender: "Aqib Raza", recentMessage: "murshad despresson horaha" },
+//   { sender: "Maaz Bin Aamir", recentMessage: "Oyeee Pagal insaan" },
+// ];
+
+export default async function SidebarChats() {
   // here, we will fetch the messages overview using a query function and display them
-
+  const user = "Muhammad Amjad";
+  const recentMessages = await getChatsWithRecentMessage(user);
   return (
     <aside className="pb-4 flex flex-col justify-between w-96 h-screen border-r dark:border-zinc-700">
       <div className="p-4 space-y-5">
@@ -25,15 +31,9 @@ export default function SidebarChats() {
             type="search"
           />
         </div>
-        <div className="space-y-2">
-          {dummyMessages.map(({ sender, recentMessage }) => (
-            <MessageOverview
-              key={sender}
-              sender={sender}
-              text={recentMessage}
-            />
-          ))}
-        </div>
+        <Suspense fallback={<RecentMessagesSkeleton />}>
+          <RecentMessages recentMessages={recentMessages} user={user} />
+        </Suspense>
       </div>
       <UserProfile sender="Muhammad Amjad" text="muhammadajoufi@gmail.com" />
     </aside>
