@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Card } from "../ui/card";
 
-export default function Contact({
+export default function MessageOverview({
   sender,
   text,
 }: {

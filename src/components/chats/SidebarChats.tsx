@@ -1,13 +1,10 @@
 import { Input } from "@/components/ui/input";
-import { AvatarFallback, Avatar } from "@/components/ui/avatar";
 import { SearchIcon } from "@/components/ui/icons";
-import { Card } from "@/components/ui/card";
-import { Button } from "../ui/button";
-import ThemeButton from "./ThemeButton";
-import Contact from "./Contact";
 import UserProfile from "./UserProfile";
+import MessageOverview from "./MessageOverview";
 
 export default function SidebarChats() {
+  // here, we will fetch the messages overview using a query function and display them
   return (
     <aside className="pb-4 flex flex-col justify-between w-96 h-screen border-r dark:border-zinc-700">
       <div className="p-4 space-y-5">
@@ -23,9 +20,15 @@ export default function SidebarChats() {
           />
         </div>
         <div className="space-y-2">
-          <Contact sender="Shahbaz" text="guys bhuk lagi, kuch mangawana?" />
-          <Contact sender="Aqib Raza" text="murshad despresson horaha" />
-          <Contact sender="Maaz" text="oeee pagal insaan" />
+          <MessageOverview
+            sender="Shahbaz"
+            text="guys bhuk lagi, kuch mangawana?"
+          />
+          <MessageOverview
+            sender="Aqib Raza"
+            text="murshad despresson horaha"
+          />
+          <MessageOverview sender="Maaz" text="oeee pagal insaan" />
         </div>
       </div>
       <UserProfile sender="Muhammad Amjad" text="muhammadajoufi@gmail.com" />
