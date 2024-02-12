@@ -5,7 +5,11 @@ import { SmileIcon } from "../ui/icons";
 import { Input } from "../ui/input";
 import { PrivateChat, User } from "@/app/db/schema";
 import { connectDB } from "@/app/db/connect";
-import { createPrivateChat, sendPrivateMessage } from "./TestServerFunction";
+import {
+  createPrivateChat,
+  sendPrivateMessage,
+  sendPublicMessage,
+} from "./TestServerFunction";
 
 export default function SendMessage() {
   const [message, setMessage] = useState("");
@@ -19,7 +23,9 @@ export default function SendMessage() {
     e.preventDefault();
     // if (!message) return;
     try {
-      sendPrivateMessage();
+      // sendPrivateMessage();
+      // createPrivateChat();
+      sendPublicMessage();
     } catch (err) {
       console.error(err);
     }

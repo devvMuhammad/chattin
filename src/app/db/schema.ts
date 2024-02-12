@@ -15,21 +15,24 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const publicChatSchema = new mongoose.Schema(
-  {
-    sender: { type: String, required: true },
-    messageId: { type: String, unique: true, required: true },
-    content: { type: String, required: true },
-    // timesta
-  },
-  { timestamps: true }
-);
-
-const privateChatSchema = new mongoose.Schema({
-  chatId: {
+const publicChatSchema = new mongoose.Schema({
+  sender: { type: String, required: true },
+  messageId: {
     type: String,
     unique: true,
+    required: true,
+    default: () => nanoid(20),
   },
+  content: { type: String, required: true },
+  // timesta
+  sentAt: {
+    type: Number,
+    required: true,
+  },
+});
+
+const privateChatSchema = new mongoose.Schema({
+  chatId: { type: String, unique: true },
   sender: { type: String, required: true },
   receiver: { type: String, required: true },
   messages: [
@@ -40,9 +43,9 @@ const privateChatSchema = new mongoose.Schema({
         unique: true,
         default: () => nanoid(20),
       },
-      content: String,
+      content: { type: String, required: true },
       //! must be provided by the client
-      timestamp: {
+      sentAt: {
         type: Number,
         required: true,
       },
