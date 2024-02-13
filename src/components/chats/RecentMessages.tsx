@@ -1,6 +1,8 @@
-import MessageOverview from "./MessageOverview";
+"use client";
+import RecentMessage from "./RecentMessage";
+// import MessageOverview from "./RecentMessage";
 
-type RecentMessage = {
+export type RecentMessage = {
   sender: string;
   receiver: string;
   chatId: string;
@@ -17,10 +19,13 @@ export default function RecentMessages({
   return (
     <div className="space-y-3">
       {recentMessages.map(({ sender, receiver, recentMessage, chatId }) => (
-        <MessageOverview
+        <RecentMessage
           key={chatId}
-          name={user === sender ? sender : receiver}
-          text={recentMessage}
+          // sender={sender}
+          // receiver={receiver}
+          name={sender !== user ? sender : receiver} // if user is not the sender then he must be the receiver
+          recentMessage={recentMessage}
+          chatId={chatId}
         />
       ))}
     </div>
