@@ -1,20 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { SmileIcon } from "@/components/ui/icons";
+import ChatMessages from "./ChatMessages";
 import ChatName from "./ChatName";
-import { Avatar, AvatarFallback } from "../ui/avatar";
-import GroupMessages from "./GroupMessages";
-import PersonalMessages from "./PersonalMessages";
-import SendMessage from "./SendMessage";
 import getMessages from "@/db/helpers/getMessages";
-
-type Message = {
-  chatType?: "group" | "personal";
-  sender: string;
-  receiver: string;
-  time: Date;
-  senderImageURL: string;
-};
+import { redirect } from "next/navigation";
 
 // const messages: Message[] = [{  }];
 
@@ -28,23 +15,12 @@ export default async function ChatWindow({ chatId }: { chatId: string }) {
     chatId,
     user,
   });
-  console.log(result);
+  if (!result.success) redirect("/chat/public");
+  console.log(result.messages);
   return (
     <section className="flex flex-col w-full">
       <ChatName />
-      <main className="flex-1 overflow-auto p-4">
-        {!result.success ? (
-          <h1 className="text-3xl font-bold ">{result?.message}</h1>
-        ) : (
-          <div className="space-y-4">
-            {/* LEFT AND RIGHT CHAT FOR GROUP CHAT */}
-            {chatId === "public" ? <GroupMessages /> : <PersonalMessages />}
-          </div>
-        )}
-      </main>
-      <footer className="border-t dark:border-zinc-700 p-4">
-        <SendMessage />
-      </footer>
+      <ChatMessages messages={result.messages} chatId={chatId} />
     </section>
   );
 }

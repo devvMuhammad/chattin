@@ -9,13 +9,6 @@ type PersonalMessage = {
   timestamp: Date;
 };
 
-type PublicMessage = {
-  sender: string;
-  messageId: string;
-  content: string;
-  timestamp: Date;
-};
-
 type PersonalChat = {
   sender: string;
   receiver: string;
