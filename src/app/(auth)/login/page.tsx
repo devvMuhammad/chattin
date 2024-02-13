@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 export default async function Component() {
   const session = await getServerSession();
-  if (session) redirect("/chat");
+  if (session) redirect("/chat/public");
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center gap-4 w-full max-w-lg rounded-lg border-2 border-gray-800 p-8 text-white">

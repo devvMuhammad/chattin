@@ -9,7 +9,7 @@ export default function LoginButton() {
   async function loginWithGoogle() {
     setIsLoading(true);
     try {
-      await signIn("google", { callbackUrl: "/chat" });
+      await signIn("google", { callbackUrl: "/chat/public" });
     } catch (error) {
       console.error("Something went wrong with your login.");
     } finally {
