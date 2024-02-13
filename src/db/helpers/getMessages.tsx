@@ -29,5 +29,9 @@ export default async function getMessages({
       success: false,
       message: "The chat you are looking for does not exist",
     };
-  return { success: true, messages: result.messages };
+  return {
+    success: true,
+    messages: result.messages,
+    name: user === result.receiver ? result.sender : result.receiver,
+  };
 }

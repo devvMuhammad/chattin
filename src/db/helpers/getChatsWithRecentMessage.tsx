@@ -19,6 +19,7 @@ export default async function getChatsWithRecentMessage(user: string) {
       },
     },
   ]);
-  // console.log(result);
+  console.log("These are the sidebar chats");
+  console.log(result);
   return result;
 }

@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-export default function ChatName() {
+export default function ChatName({ name }: { name: string }) {
   return (
     <header className="border-b dark:border-zinc-700 p-4">
       <h2 className="text-xl font-bold flex items-center gap-2">
@@ -10,7 +10,7 @@ export default function ChatName() {
           <AvatarFallback>U</AvatarFallback>
         </Avatar>
         <div>
-          Maaz Bin Aamir
+          {name}
           <span className="text-xs text-green-600 block">Online</span>
         </div>
       </h2>
