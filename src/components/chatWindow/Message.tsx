@@ -15,9 +15,11 @@ export default function MessageComponent({
   return (
     <div className="flex items-end gap-2">
       <div className="flex gap-2 items-center">
-        {/* <Avatar className="h-10 w-10 ">
-          <AvatarFallback className="bg-yellow-500">S</AvatarFallback>
-        </Avatar> */}
+        {type === "public" && (
+          <Avatar className="h-10 w-10 ">
+            <AvatarFallback className="bg-yellow-500">S</AvatarFallback>
+          </Avatar>
+        )}
         <div className="flex flex-col gap-1">
           <p className="text-[18px]">{sender}</p>
           <div className="rounded-lg bg-zinc-200 dark:bg-zinc-700 p-2">
