@@ -3,13 +3,7 @@ import { FormEvent, useState } from "react";
 import { Button } from "../ui/button";
 import { SmileIcon } from "../ui/icons";
 import { Input } from "../ui/input";
-import { PrivateChat, User } from "@/app/db/schema";
-import { connectDB } from "@/app/db/connect";
-import {
-  createPrivateChat,
-  sendPrivateMessage,
-  sendPublicMessage,
-} from "./TestServerFunction";
+import { createPrivateChat } from "./TestServerFunction";
 
 export default function SendMessage() {
   const [message, setMessage] = useState("");
@@ -24,8 +18,9 @@ export default function SendMessage() {
     // if (!message) return;
     try {
       // sendPrivateMessage();
-      // createPrivateChat();
-      sendPublicMessage();
+      createPrivateChat();
+      // sendPublicMessage();
+      // getChatsWithRecentMessage("Muhammad Amjad");
     } catch (err) {
       console.error(err);
     }

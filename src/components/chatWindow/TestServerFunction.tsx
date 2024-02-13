@@ -1,25 +1,30 @@
 "use server";
 
-import { connectDB } from "@/app/db/connect";
-import { PrivateChat, PublicChat } from "@/app/db/schema";
+import { connectDB } from "@/db/connect";
+import { PrivateChat, PublicChat } from "@/db/schema";
 
 export async function createPrivateChat() {
   await connectDB();
   const response = await PrivateChat.create({
-    sender: "kotak",
-    receiver: "panir",
-    messages: [{ content: "waya kana jani", sentAt: new Date().getTime() }],
+    sender: "Muhammad Amjad",
+    receiver: "Sher Afzal",
+    messages: [
+      { content: "Hey there, what is up?", sentAt: new Date().getTime() },
+    ],
   });
-  // console.log(response);
+  console.log(response);
 }
 
 export async function sendPrivateMessage() {
   await connectDB();
   const response = await PrivateChat.updateOne(
-    { sender: "kotak" },
+    { sender: "Muhammad Amjad" },
     {
       $push: {
-        messages: { content: "sare sha", sentAt: new Date().getTime() },
+        messages: {
+          content: "za rawaan yum alaka",
+          sentAt: new Date().getTime(),
+        },
       },
     }
   );
@@ -29,8 +34,8 @@ export async function sendPrivateMessage() {
 export async function sendPublicMessage() {
   await connectDB();
   const response = await PublicChat.create({
-    sender: "Gul Majid",
-    content: "gul majid khabari kom",
+    sender: "Muhammad Amjad",
+    content: "Yo man, what is goin on?",
     sentAt: new Date().getTime(),
   });
 }

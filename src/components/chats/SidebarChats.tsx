@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "@/components/ui/icons";
 import UserProfile from "./UserProfile";
-import getChatsWithRecentMessage from "@/app/db/helpers/getChatsWithRecentMessage";
+import getChatsWithRecentMessage from "@/db/helpers/getChatsWithRecentMessage";
 import RecentMessages from "./RecentMessages";
 import { Suspense } from "react";
 import RecentMessagesSkeleton from "./RecentMessagesSkeleton";

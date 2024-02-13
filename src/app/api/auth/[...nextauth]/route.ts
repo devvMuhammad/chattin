@@ -1,7 +1,7 @@
 // export {GET,POST} from "@/auth";
 //! CURRENTLY LEARNING THE v4 OF THE NEXT AUTH
-import { connectDB } from "@/app/db/connect";
-import { User } from "@/app/db/schema";
+import { connectDB } from "@/db/connect";
+import { User } from "@/db/schema";
 import { nanoid } from "nanoid";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
