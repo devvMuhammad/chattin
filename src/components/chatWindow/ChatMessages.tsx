@@ -23,19 +23,13 @@ export default function ChatMessages({
           <h1 className="text-3xl font-bold ">{result?.message}</h1>
         ) : ( */}
         <div className="space-y-4">
-          {/* LEFT AND RIGHT CHAT FOR GROUP CHAT */}
-          {/* {chatId === "public" ? (
-            <GroupMessages messages={result.messages} />
-          ) : (
-            <PersonalMessages />
-          )} */}
           {messages.map(({ sender, content, sentAt, messageId }) => (
             <MessageComponent
               messageId={messageId}
               sender={sender}
               content={content}
               sentAt={sentAt}
-              type={chatId === "public" ? "private" : "private"}
+              type={chatId === "public" ? "public" : "private"}
             />
           ))}
         </div>
