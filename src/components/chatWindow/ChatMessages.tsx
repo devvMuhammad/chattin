@@ -25,6 +25,7 @@ export default function ChatMessages({
         <div className="space-y-4">
           {messages.map(({ sender, content, sentAt, messageId }) => (
             <MessageComponent
+              key={chatId}
               messageId={messageId}
               sender={sender}
               content={content}

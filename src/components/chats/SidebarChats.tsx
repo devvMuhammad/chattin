@@ -6,7 +6,7 @@ import RecentMessages from "./RecentMessages";
 import { Suspense } from "react";
 import RecentMessagesSkeleton from "./RecentMessagesSkeleton";
 
-export const revalidate = 10;
+export const revalidate = 300;
 
 // const dummyMessages = [
 //   { sender: "Shahbaz", recentMessage: "guys bhuk lagi, kuch mangawana?" },

@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import ChatMessages from "./ChatMessages";
 import ChatName from "./ChatName";
 import getMessages from "@/db/helpers/getMessages";
 import { redirect } from "next/navigation";
+import MessagesSkeleton from "./MessagesSkeleton";
 
 // const messages: Message[] = [{  }];
 
@@ -16,7 +18,7 @@ export default async function ChatWindow({ chatId }: { chatId: string }) {
     user,
   });
   if (!result.success) redirect("/chat/public");
-  console.log(result);
+  // console.log(result);
   return (
     <section className="flex flex-col w-full">
       <ChatName name={result.name} />
