@@ -1,6 +1,8 @@
 "use client";
+import { useTransition } from "react";
 import RecentMessage from "./RecentMessage";
-// import MessageOverview from "./RecentMessage";
+import { useRouter } from "next/navigation";
+// import MessageOverviewfrom "./RecentMessage";
 
 export type RecentMessage = {
   sender: string;
@@ -16,16 +18,24 @@ export default function RecentMessages({
   user: string;
   recentMessages: RecentMessage[];
 }) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   return (
     <div className="space-y-3">
       {recentMessages.map(({ sender, receiver, recentMessage, chatId }) => (
         <RecentMessage
           key={chatId}
-          // sender={sender}
-          // receiver={receiver}
           name={sender !== user ? sender : receiver} // if user is not the sender then he must be the receiver
           recentMessage={recentMessage}
           chatId={chatId}
+          // startTransition={startTransition}
+          isPending={isPending}
+          onClick={() =>
+            startTransition(() => {
+              console.log("tranistion happening");
+              router.push(`/chat/${chatId}`);
+            })
+          }
         />
       ))}
     </div>

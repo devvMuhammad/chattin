@@ -8,13 +8,25 @@ export default function RecentMessage({
   name,
   recentMessage,
   chatId,
-}: { name: string } & Omit<RecentMessage, "receiver" | "sender">) {
+  // startTransition,
+  isPending,
+  onClick,
+}: {
+  name: string;
+  // startTransition: TransitionStartFunction;
+  isPending: boolean;
+  onClick: () => void;
+} & Omit<RecentMessage, "receiver" | "sender">) {
   const router = useRouter();
 
   return (
     <Card
-      onClick={() => router.push(`/chat/${chatId}`)}
-      className="p-2 flex gap-2 items-center border-zinc-700 hover:bg-zinc-900 cursor-pointer"
+      onClick={onClick}
+      // disabled={isPending}
+      className={`p-2 flex gap-2 items-center border-zinc-700 ${
+        isPending ? "bg-zinc-700" : "bg-zinc-900"
+      }  cursor-pointer`}
+      // aria-disabled={isPending}
     >
       <Avatar className="h-14 w-14 text-3xl">
         <AvatarFallback>S</AvatarFallback>
