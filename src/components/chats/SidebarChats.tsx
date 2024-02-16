@@ -5,6 +5,7 @@ import getChatsWithRecentMessage from "@/db/helpers/getChatsWithRecentMessage";
 import RecentMessages from "./RecentMessages";
 import { Suspense } from "react";
 import RecentMessagesSkeleton from "./RecentMessagesSkeleton";
+import SearchUsers from "./SearchUsers";
 
 export const revalidate = 300;
 
@@ -23,14 +24,7 @@ export default async function SidebarChats() {
       <div className="p-4 space-y-5">
         <h2 className="text-xl font-bold">Messages</h2>
 
-        <div className="relative">
-          <SearchIcon className="absolute left-2.5 top-3 h-4 w-4 text-zinc-500 dark:text-zinc-400" />
-          <Input
-            className="pl-8"
-            placeholder="Start a conversation..."
-            type="search"
-          />
-        </div>
+        <SearchUsers />
         <Suspense fallback={<RecentMessagesSkeleton />}>
           <RecentMessages recentMessages={recentMessages} user={user} />
         </Suspense>
