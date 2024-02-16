@@ -17,14 +17,12 @@ export default function RecentMessage({
   isPending: boolean;
   onClick: () => void;
 } & Omit<RecentMessage, "receiver" | "sender">) {
-  const router = useRouter();
-
   return (
     <Card
       onClick={onClick}
       // disabled={isPending}
       className={`p-2 flex gap-2 items-center border-zinc-700 ${
-        isPending ? "bg-zinc-700" : "bg-zinc-900"
+        isPending ? "bg-zinc-900" : "bg-black"
       }  cursor-pointer`}
       // aria-disabled={isPending}
     >
