@@ -1,7 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import { nanoid } from "nanoid";
 
-const userSchema = new mongoose.Schema({
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  id: string;
+}
+
+const userSchema = new mongoose.Schema<IUser>({
   name: String,
   email: {
     type: String,
@@ -15,7 +21,14 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const publicChatSchema = new mongoose.Schema({
+interface IPublicChat extends Document {
+  sender: string;
+  messageId: string;
+  content: string;
+  sentAt: number;
+}
+
+const publicChatSchema = new mongoose.Schema<IPublicChat>({
   sender: { type: String, required: true },
   messageId: {
     type: String,
@@ -24,14 +37,26 @@ const publicChatSchema = new mongoose.Schema({
     default: () => nanoid(20),
   },
   content: { type: String, required: true },
-  // timesta
   sentAt: {
     type: Number,
     required: true,
   },
 });
 
-const privateChatSchema = new mongoose.Schema({
+interface IPrivateChatMessage {
+  messageId: string;
+  content: string;
+  sentAt: number;
+}
+
+interface IPrivateChat extends Document {
+  chatId: string;
+  sender: string;
+  receiver: string;
+  messages: IPrivateChatMessage[];
+}
+
+const privateChatSchema = new mongoose.Schema<IPrivateChat>({
   chatId: { type: String, unique: true },
   sender: { type: String, required: true },
   receiver: { type: String, required: true },
@@ -44,7 +69,6 @@ const privateChatSchema = new mongoose.Schema({
         default: () => nanoid(20),
       },
       content: { type: String, required: true },
-      //! must be provided by the client
       sentAt: {
         type: Number,
         required: true,
@@ -53,7 +77,6 @@ const privateChatSchema = new mongoose.Schema({
   ],
 });
 
-//! saving the id for the chatId
 privateChatSchema.pre("save", function (next) {
   if (!this.chatId) {
     this.chatId = nanoid(20);
@@ -61,12 +84,17 @@ privateChatSchema.pre("save", function (next) {
   next();
 });
 
-export const User = mongoose.models?.User || mongoose.model("User", userSchema);
+export const User =
+  mongoose.models?.User || mongoose.model<IUser>("User", userSchema);
 
 export const PublicChat =
   mongoose.models?.PublicChat ||
-  mongoose.model("PublicChat", publicChatSchema, "public-chat");
+  mongoose.model<IPublicChat>("PublicChat", publicChatSchema, "public-chat");
 
 export const PrivateChat =
   mongoose.models?.PrivateChat ||
-  mongoose.model("PrivateChat", privateChatSchema, "private-chat");
+  mongoose.model<IPrivateChat>(
+    "PrivateChat",
+    privateChatSchema,
+    "private-chat"
+  );
