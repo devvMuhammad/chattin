@@ -49,33 +49,41 @@ interface IPrivateChatMessage {
   sentAt: number;
 }
 
-interface IPrivateChat extends Document {
+export interface IPrivateChat extends Document {
   chatId: string;
   sender: string;
   receiver: string;
   messages: IPrivateChatMessage[];
 }
 
-const privateChatSchema = new mongoose.Schema<IPrivateChat>({
-  chatId: { type: String, unique: true },
-  sender: { type: String, required: true },
-  receiver: { type: String, required: true },
-  messages: [
-    {
-      messageId: {
-        type: String,
-        required: true,
-        unique: true,
-        default: () => nanoid(20),
-      },
-      content: { type: String, required: true },
-      sentAt: {
-        type: Number,
-        required: true,
-      },
+const privateChatSchema = new mongoose.Schema<IPrivateChat>(
+  {
+    chatId: {
+      type: String,
+      required: true,
+      unique: true,
+      default: () => nanoid(20),
     },
-  ],
-});
+    sender: { type: String, required: true },
+    receiver: { type: String, required: true },
+    messages: [
+      {
+        messageId: {
+          type: String,
+          required: true,
+          unique: true,
+          default: () => nanoid(20),
+        },
+        content: { type: String, required: true },
+        sentAt: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
 privateChatSchema.pre("save", function (next) {
   if (!this.chatId) {
