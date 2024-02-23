@@ -6,8 +6,11 @@ export default function RecentMessagesSkeleton() {
     <div className="space-y-3">
       {Array(5)
         .fill(" ")
-        .map(() => (
-          <Card className="p-2 flex gap-2 items-center border-zinc-700 hover:bg-zinc-900 cursor-pointer">
+        .map((_, i) => (
+          <Card
+            key={i}
+            className="p-2 flex gap-2 items-center border-zinc-700 hover:bg-zinc-900 cursor-pointer"
+          >
             <Skeleton className="h-14 w-20 rounded-full" />
             <div className="w-full space-y-2">
               <Skeleton className="w-full h-8 rounded-lg" />
