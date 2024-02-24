@@ -21,7 +21,7 @@ export default function RecentMessages({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 max-h-[75vh] overflow-y-auto overflow-x-hidden">
       {recentMessages.map(({ sender, receiver, recentMessage, chatId }) => (
         <RecentMessage
           key={chatId}
