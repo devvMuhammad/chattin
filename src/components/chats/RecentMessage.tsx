@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Card } from "../ui/card";
 import { RecentMessage } from "./RecentMessages";
+import { Button } from "../ui/button";
 
 export default function RecentMessage({
   name,
