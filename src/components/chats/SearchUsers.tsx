@@ -9,7 +9,7 @@ export default function SearchUsers() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        <Button variant="outline">Start a Chat</Button>
       </DialogTrigger>
       <DialogContent className="border border-gray-600 p-8 top-[125px] translate-y-0">
         <SearchBar />
