@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 export interface IUser extends Document {
   name: string;
   email: string;
-  id: string;
+  id?: string;
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -21,14 +21,14 @@ const userSchema = new mongoose.Schema<IUser>({
   },
 });
 
-interface IPublicChat extends Document {
+export interface IPublicChat {
   sender: string;
-  messageId: string;
+  messageId?: string;
   content: string;
   sentAt: number;
 }
 
-const publicChatSchema = new mongoose.Schema<IPublicChat>({
+const publicChatSchema = new mongoose.Schema<IPublicChat & Document>({
   sender: { type: String, required: true },
   messageId: {
     type: String,
@@ -43,8 +43,8 @@ const publicChatSchema = new mongoose.Schema<IPublicChat>({
   },
 });
 
-interface IPrivateChatMessage {
-  messageId: string;
+export interface IPrivateChatMessage {
+  messageId?: string;
   content: string;
   sentAt: number;
 }
