@@ -11,6 +11,7 @@ export default async function getChatsWithRecentMessage(user: string) {
         recentMessage: { $arrayElemAt: ["$messages.content", -1] },
       },
     },
+    { $sort: { createdAt: 1 } },
     {
       $project: {
         _id: 0,
