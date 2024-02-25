@@ -9,6 +9,7 @@ import { pusherClient as pusher } from "@/pusher/client";
 import { sendMessage } from "@/pusher/handlers";
 import { useTestAuthContext } from "../test-auth";
 import { set } from "mongoose";
+import { Channel } from "pusher-js";
 
 export type Message = {
   sender: string;
@@ -27,6 +28,7 @@ export default function ChatMessages({
   chatId: string;
 }) {
   //! test user, in actual, you will get this from the next-auth-session provider
+  const chatType = chatId === "public" ? "public" : "private";
   const { user } = useTestAuthContext();
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState("");
@@ -54,41 +56,64 @@ export default function ChatMessages({
       sentAt: `${new Date().getTime()}`,
     });
     try {
-      await sendMessage({
-        chatType: "public",
-        message: {
-          content: input,
-          sender: user,
-          sentAt: new Date().getTime(),
-        },
-      });
+      if (chatType === "public") {
+        await sendMessage({
+          chatType: "public",
+          message: {
+            content: input,
+            sender: user,
+            sentAt: new Date().getTime(),
+          },
+        });
+      } else {
+        sendMessage({
+          chatType: "private",
+          chatId: chatId,
+          message: {
+            content: input,
+            sentAt: new Date().getTime(),
+            sender: user,
+          },
+        });
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
+  function messageEventHandler(message: Message) {
+    console.log(`listening to the private message in private_${chatId}`);
+    if (message.sender === user) {
+      //* when the message is sent to yourself, keep removing the last pending ones, they will be at the start of the array
+      setPendingMessages((prev) => {
+        let copy = [...prev];
+        copy.shift();
+        return copy;
+      });
+      addMessage(message);
+      return;
+    } else {
+      addMessage(message);
+    }
+  }
+
   useEffect(() => {
-    const channel = pusher.subscribe("public");
-    console.log(pendingMessages);
-    channel.bind("message", (message: Message) => {
-      if (message.sender === user) {
-        //* when the message is sent to yourself, keep removing the last pending ones, they will be at the start of the array
-        setPendingMessages((prev) => {
-          let copy = [...prev];
-          copy.shift();
-          return copy;
-        });
-        addMessage(message);
-        return;
-      } else {
-        addMessage(message);
-      }
-    });
+    const channelName = chatId === "public" ? "public" : `private_${chatId}`;
+    console.log(channelName, chatId);
+    let channel: Channel;
+    if (chatId === "public") {
+      channel = pusher.subscribe("public");
+      channel.bind("message", messageEventHandler);
+    } else {
+      channel = pusher.subscribe("private_" + chatId);
+      channel.bind("message-private", messageEventHandler);
+    }
     return () => {
-      pusher.unsubscribe("public");
+      pusher.unsubscribe(channelName);
       channel.unbind("message");
+      channel.unbind("message-private");
     };
-  }, [user]);
+  }, [user, chatId]);
 
   return (
     <>
