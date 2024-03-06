@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/components/session-provider";
-import TestUserContextProvider from "@/components/test-auth";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -22,7 +21,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const session = await getServerSession();
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body
@@ -37,10 +36,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <TestUserContextProvider>
-            {/* <SessionProvider session={session}>{children}</SessionProvider> */}
-            {children}
-          </TestUserContextProvider>
+          <SessionProvider session={session}>{children}</SessionProvider>
         </ThemeProvider>
       </body>
     </html>

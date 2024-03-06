@@ -2,8 +2,9 @@
 import { FormEvent, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { startConversation } from "@/db/helpers/startConversation";
+import { startConversation as startConversationAction } from "@/db/helpers/startConversation";
 import { useSession } from "next-auth/react";
+import { useTestAuthContext } from "../test-auth";
 
 export default function StartConversation({
   id,
@@ -12,7 +13,9 @@ export default function StartConversation({
   id: string;
   name: string;
 }) {
-  const { data: session } = useSession();
+  //! UPDATE THEM LATER
+  // const { data: session } = useSession();
+  const { user } = useTestAuthContext();
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -23,8 +26,9 @@ export default function StartConversation({
     setLoading(true);
     try {
       const message = inputRef.current?.value as string;
-      const response = await startConversation({
-        sender: session?.user.name as string,
+      const response = await startConversationAction({
+        // sender: session?.user.name as string,
+        sender: user,
         receiver: name,
         message,
       });

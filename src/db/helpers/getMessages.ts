@@ -22,8 +22,8 @@ export default async function getMessages({
   const result = await PrivateChat.findOne({
     $and: [{ $or: [{ receiver: user }, { sender: user }] }, { chatId }],
   });
-  console.log("These are messages for a particular Id");
-  console.log(result);
+  // console.log("These are messages for a particular Id");
+  // console.log(result);
   if (!result)
     return {
       success: false,

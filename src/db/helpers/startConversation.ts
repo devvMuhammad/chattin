@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { PrivateChat } from "../schema";
+import { sendMessage } from "@/pusher/handlers";
 
 //* starting a conversation means just adding a new document to the 'private-chats' collection
 //* here, receiver refers to the one with whom you are intitiating a chat
@@ -20,7 +21,7 @@ export async function startConversation({
     //   receiver,
     //   messages: [{ content: message, sentAt: new Date().getTime() }],
     // });
-    const response = await PrivateChat.findOneAndUpdate(
+    const { chatId } = await PrivateChat.findOneAndUpdate(
       {
         $or: [
           {
@@ -39,8 +40,15 @@ export async function startConversation({
       { upsert: true, new: true }
     );
     // console.log("INSIDE INITIATING THE CONVERSATION", response);
+    //* using the chatId, send a message to the receiver
+    await sendMessage({
+      chatType: "private",
+      chatId: chatId,
+      message: { content: message, sentAt: new Date().getTime(), sender },
+    });
+    // console.log(`response of starting the conversation ${response}`);
     revalidatePath("/chat/");
-    return response;
+    return "Message sent successfully";
   } catch (err) {
     console.error(err);
   }

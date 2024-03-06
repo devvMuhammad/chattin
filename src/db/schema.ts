@@ -47,6 +47,7 @@ export interface IPrivateChatMessage {
   messageId?: string;
   content: string;
   sentAt: number;
+  sender: string;
 }
 
 export interface IPrivateChat extends Document {
@@ -77,6 +78,10 @@ const privateChatSchema = new mongoose.Schema<IPrivateChat>(
         content: { type: String, required: true },
         sentAt: {
           type: Number,
+          required: true,
+        },
+        sender: {
+          type: String,
           required: true,
         },
       },

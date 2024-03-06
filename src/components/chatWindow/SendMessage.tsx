@@ -18,7 +18,7 @@ export default function SendMessage() {
     // if (!message) return;
     try {
       // sendPrivateMessage();
-      createPrivateChat();
+      // createPrivateChat();
       // sendPublicMessage();
       // getChatsWithRecentMessage("Muhammad Amjad");
     } catch (err) {

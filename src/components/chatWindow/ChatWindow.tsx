@@ -17,12 +17,16 @@ export default async function ChatWindow({ chatId }: { chatId: string }) {
     chatId,
     user,
   });
+  console.log(result);
   if (!result.success) redirect("/chat/public");
   // console.log(result);
   return (
     <section className="flex flex-col w-full">
       <ChatName name={result.name} />
-      <ChatMessages messages={result.messages} chatId={chatId} />
+      <ChatMessages
+        initialMessages={JSON.parse(JSON.stringify(result.messages))}
+        chatId={chatId}
+      />
     </section>
   );
 }

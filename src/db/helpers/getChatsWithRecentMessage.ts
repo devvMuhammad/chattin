@@ -1,10 +1,23 @@
 "use server";
 import { connectDB } from "../connect";
-import { PrivateChat } from "../schema";
+import {
+  IPrivateChatMessage,
+  IPublicChat,
+  PrivateChat,
+  PublicChat,
+} from "../schema";
+
+export type RecentMessage = {
+  sender: string;
+  receiver: string;
+  chatId: string;
+  recentMessage: string;
+};
 
 export default async function getChatsWithRecentMessage(user: string) {
   await connectDB();
-  const result = await PrivateChat.aggregate([
+  // try {
+  const privateRecentMessagesPromise = PrivateChat.aggregate([
     { $match: { $or: [{ sender: user }, { receiver: user }] } },
     {
       $addFields: {
@@ -15,12 +28,19 @@ export default async function getChatsWithRecentMessage(user: string) {
     {
       $project: {
         _id: 0,
-        _v: 0,
+        __v: 0,
         messages: 0,
       },
     },
   ]);
-  console.log("These are the sidebar chats");
-  console.log(result);
-  return result;
+  const recentPublicMessagePromise = PublicChat.find().sort({ sentAt: "desc" });
+  const [[recentPublicMessage], recentPrivateMessages] = await Promise.all([
+    recentPublicMessagePromise,
+    privateRecentMessagesPromise,
+  ]);
+  console.log([recentPublicMessage, recentPrivateMessages]);
+  return [recentPublicMessage, recentPrivateMessages] as const;
+  // } catch (err) {
+  //   console.error(err);
+  // }
 }
